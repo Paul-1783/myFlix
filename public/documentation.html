@@ -274,15 +274,23 @@
             </tbody>
         </table>
         <h2>Example Request:</h2>
-        <pre><code class="text-white">{ 
-        name: "littleTimmy",
-        favoriteMovies: ["The Draughtman's Contract", "Passage to India"],
+        <pre><code class="text-white">
+        { 
+            "username": "Mira",
+            "password" : "dreyfuss",
+            "email": "mirasEmailAddress@hotmail.com",
+            "birthday": "1982-10-12"
+            favoriteMovies: ["The Draughtman's Contract", "Passage to India"],
         }</code></pre>
         <h2>Example Response:</h2>
-        <pre><code class="text-white">{
-        id: 2,
-        name: "littleTimmy",
-        favoriteMovies: ["The Draughtman's Contract", "Passage to India"],
+        <pre><code class="text-white">
+        {
+            id: 2,
+            "username": "Mira",
+            "password" : "dreyfuss",
+            "email": "mirasEmailAddress@hotmail.com",
+            "birthday": "1982-10-12"
+            favoriteMovies: ["The Draughtman's Contract", "Passage to India"],
         }
         </code> 
   </pre>
@@ -290,8 +298,8 @@
 
     <div class="container border bg-secondary  mt-5" id="/users/:name/:newUsername">
 
-        <h1>Ressource URL: <span class="font-weight-light text-white">/users/:name/:newUsername</span></h1>
-        <p>Allows users to update their user info (username).</p>
+        <h1>Ressource URL: <span class="font-weight-light text-white">/users/:Username</span></h1>
+        <p>Allows users to update their user info.</p>
         <table class="table table-bordered  table-responsive-sm">
             <thead class="thead-dark">
                 <tr>
@@ -303,24 +311,41 @@
             </thead>
             <tbody>
                 <tr class=" border-dark">
-                    <td class="table-light">:name/:newUsername</td>
+                    <td class="table-light">/users/:Username</td>
                     <td class="table-light">PUT</td>
                     <td class="table-light">None</td>
-                    <td class="table-light">Text</td>
+                    <td class="table-light">JSON</td>
                 </tr>
             </tbody>
         </table>
         <h2>Example Request:</h2>
-        <pre><code class="text-white">-</code></pre>
+        <pre><code class="text-white">
+            {
+                "username": "martin",
+                "password" : "rosebud",
+                "email": "martinsTotallyNewEmailAddress@hotmail.com",
+                "birthday": "1998-03-29"
+            }
+        </code></pre>
         <h2>Example Response:</h2>
-        <pre><code class="text-white">-
+        <pre><code class="text-white">
+            {
+                "_id": "648ae5e589258500d5024aa5",
+                "username": "martin",
+                "password": "rosebud",
+                "email": "martinsTotallyNewEmailAddress@hotmail.com",
+                "favorite_movies": [
+                "64846945bcbb338587e57705"
+                ],
+                "__v": 0
+            }
             </code> 
       </pre>
     </div>
 
     <div class="container border bg-secondary  mt-5" id="/users/:name/:favoriteMovie/">
 
-        <h1>Ressource URL: <span class="font-weight-light text-white">/users/:name/:favoriteMovie/</span></h1>
+        <h1>Ressource URL: <span class="font-weight-light text-white">/users/:name/movies/:favoriteMovieId</span></h1>
         <p>Allows users to add a movie to their list of favorites.</p>
         <table class="table table-bordered  table-responsive-sm">
             <thead class="thead-dark">
@@ -333,7 +358,7 @@
             </thead>
             <tbody>
                 <tr class=" border-dark">
-                    <td class="table-light">/:name/:favoriteMovie/</td>
+                    <td class="table-light">:name :favoriteMovieId</td>
                     <td class="table-light">POST</td>
                     <td class="table-light">None</td>
                     <td class="table-light">Text</td>
@@ -341,7 +366,7 @@
             </tbody>
         </table>
         <h2>Example Request:</h2>
-        <pre><code class="text-white">http://localhost:8080/users/martha/morituri</code></pre>
+        <pre><code class="text-white">http://localhost:8080/users/martha/movies/morituri</code></pre>
         <h2>Example Response:</h2>
         <pre><code class="text-white">-
                 </code> 
@@ -350,7 +375,8 @@
 
     <div class="container border bg-secondary  mt-5" id="/users/:id/:favoriteMovie">
 
-        <h1>Ressource URL: <span class="font-weight-light text-white">/users/:id/:favoriteMovie</span></h1>
+        <h1>Ressource URL: <span class="font-weight-light text-white">/users/:Username/movies/:favoriteMovieId</span>
+        </h1>
         <p>Allows users to remove a movie from their list of favorites.</p>
         <table class="table table-bordered  table-responsive-sm">
             <thead class="thead-dark">
@@ -363,7 +389,7 @@
             </thead>
             <tbody>
                 <tr class=" border-dark">
-                    <td class="table-light">/:id/:favoriteMovie/</td>
+                    <td class="table-light"> :Username :favoriteMovieId</td>
                     <td class="table-light">DELETE</td>
                     <td class="table-light">None</td>
                     <td class="table-light">Text</td>
@@ -380,7 +406,7 @@
 
     <div class="container border bg-secondary mt-5" id="/users/:id">
 
-        <h1>Ressource URL: <span class="font-weight-light text-white">/users/:id</span></h1>
+        <h1>Ressource URL: <span class="font-weight-light text-white">/users/:Username</span></h1>
         <p>Allows existing users to deregister.</p>
         <table class="table table-bordered  table-responsive-sm">
             <thead class="thead-dark">
@@ -393,7 +419,7 @@
             </thead>
             <tbody>
                 <tr class=" border-dark">
-                    <td class="table-light">/:id</td>
+                    <td class="table-light">:Username</td>
                     <td class="table-light">DELETE</td>
                     <td class="table-light">None</td>
                     <td class="table-light">Text</td>
