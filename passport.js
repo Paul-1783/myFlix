@@ -14,7 +14,6 @@ passport.use(
       passwordField: "password",
     },
     (username, password, callback) => {
-      // callback fct - where from? what is difference to keyword 'done'?
       console.log(username + " " + password);
       Users.findOne({ username: username }).then((user) => {
         if (!user) {
