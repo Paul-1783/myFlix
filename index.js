@@ -26,17 +26,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const cors = require("cors");
 
-let allowedOrigins = ["http://localhost:8080", "http://testsite.com"];
+let allowedOrigins = ["*"];
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
-        let message =
-          "The CORS policy for this application doesn't allow access from origin" +
-          origin;
-        return callback(new Error(message), false);
-      }
+      // if (!origin) return callback(null, true);
+      // if (allowedOrigins.indexOf(origin) === -1) {
+      //   let message =
+      //     "The CORS policy for this application doesn't allow access from origin" +
+      //     origin;
+      //   return callback(new Error(message), false);
+      // }
       return callback(null, true);
     },
   })
@@ -184,11 +184,11 @@ app.post(
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-    let hashedPassword = Users.hashPassWord(req.body.Password);
+    let hashedPassword = Users.hashPassWord(req.body.password);
     Users.findOne({ username: req.body.username })
       .then((user) => {
         if (user) {
-          return res.status(400).send(req.body.Username + "already exists.");
+          return res.status(400).send(req.body.username + "already exists.");
         } else {
           Users.create({
             username: req.body.username,
