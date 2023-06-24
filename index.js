@@ -169,7 +169,6 @@ app.get(
 }*/
 app.post(
   "/users",
-  // passport.authenticate("jwt", { session: false }), // to delete in 2.10 ? missing in the text
   [
     check("username", "Username is required").isLength({ min: 5 }),
     check(
@@ -270,6 +269,15 @@ app.post(
 app.put(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
+  [
+    check("username", "Username is required").isLength({ min: 5 }),
+    check(
+      "username",
+      "Username contains non-aphanumerical characters - not allowed."
+    ).isAlphanumeric(),
+    check("password", "Password is required").not().isEmpty(),
+    check("email", "Email does not appear to be valid.").isEmail(),
+  ],
   (req, res) => {
     Users.findOneAndUpdate(
       { username: req.params.Username },
