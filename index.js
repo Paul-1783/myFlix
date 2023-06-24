@@ -276,6 +276,10 @@ app.put(
       "Username contains non-aphanumerical characters - not allowed."
     ).isAlphanumeric(),
     check("password", "Password is required").not().isEmpty(),
+    check(
+      "password",
+      "Password is too short, a minimum of 5 characters is required."
+    ).isLength({ min: 5 }),
     check("email", "Email does not appear to be valid.").isEmail(),
   ],
   (req, res) => {
