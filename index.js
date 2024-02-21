@@ -26,6 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const cors = require("cors");
 
+//allowed urls for Cross - Origin Resource Sharing
 let allowedOrigins = [
   "*",
   "https://myflixmovielibrary.netlify.app",
@@ -74,9 +75,23 @@ app.use((err, req, res, next) => {
   res.status(500).send("Grave Error of application");
 });
 
+/**
+ * navigates to the root element of application
+ * @param {Object} req - Express request object.
+ * @param{Object} res - Express response object.
+ */
+
 app.get("/", (req, res) => {
   res.send("root of movie web api");
 });
+
+/**
+ *  gets all movies
+ *  @alias getMovies
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - a promise as return object.
+ *  */
 
 app.get(
   "/movies",
@@ -90,6 +105,14 @@ app.get(
       });
   }
 );
+
+/**
+ *  gets a list of all users.
+ * @alias getUsers
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - a promise as return object.
+ *  */
 
 app.get(
   "/users",
@@ -106,6 +129,14 @@ app.get(
   }
 );
 
+/**
+ * gets one user.
+ * @alias getUser
+ * @param {Object} req - Express request object with parameter username.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - a promise as return object.
+ */
+
 app.get(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
@@ -120,6 +151,14 @@ app.get(
       });
   }
 );
+
+/**
+ * gets information on specific director
+ * @alias getDirector
+ * @param {Object} req - Express request object with parameter name of director.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - a promise as return object.
+ */
 
 app.get(
   "/movies/directors/:directorName",
@@ -136,6 +175,14 @@ app.get(
   }
 );
 
+/**
+ * gets a list of movies for specific genre.
+ * @alias getGenreList
+ * @param {Object} req - Express request object with parameter name of genre.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - a promise as return object.
+ */
+
 app.get(
   "/movies/genre/:genreName",
   passport.authenticate("jwt", { session: false }),
@@ -150,6 +197,14 @@ app.get(
       });
   }
 );
+
+/**
+ * gets a specific movie.
+ * @alias getGenreList
+ * @param {Object} req - Express request object with parameter name of movie.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - a promise as return object.
+ */
 
 app.get(
   "/movies/:name",
@@ -166,15 +221,16 @@ app.get(
   }
 );
 
-//Add a user
-/* We’ll expect JSON in this format
-{
-  ID: Integer,
-  Username: String,
-  Password: String,
-  Email: String,
-  Birthday: Date
-}*/
+/**
+ *  adds a user to database.
+ * @alias addUser
+ * @param {string} username - Express request object with parameter name of user.
+ * @param {string} password - Express request object with parameter password.
+ * @param {string} email - Express request object with parameter email.
+ * @param {date} birtday - Express request object with parameter birthday.
+ * @returns {Promise<void>} - a promise as return object.
+ */
+
 app.post(
   "/users",
   [
@@ -214,6 +270,13 @@ app.post(
   }
 );
 
+/**
+ * removes a user profile from database.
+ * @alias deleteUser
+ * @param {string} username - - Express request object with parameter name of user.
+ * @returns {Promise<void>} - a promise as return object.
+ */
+
 app.delete(
   "/users/:Username/",
   passport.authenticate("jwt", { session: false }),
@@ -232,6 +295,13 @@ app.delete(
       });
   }
 );
+
+/**
+ * removes a movie from list of favorite movies in user profile.
+ * @alias deleteFavMovie
+ * @param {string} movieId - - Express request object with parameter id of movie.
+ * @returns {Promise<void>} - a promise as return object.
+ */
 
 app.delete(
   "/users/:Username/movies/:favoriteMovieId",
@@ -254,6 +324,13 @@ app.delete(
   }
 );
 
+/**
+ * adds a movie to list of favorite movies in user profile.
+ * @alias addsFavMovie
+ * @param {string} movieId - - Express request object with parameter id of movie.
+ * @returns {Promise<void>} - a promise as return object.
+ */
+
 app.post(
   "/users/:name/movies/:favoriteMovieId",
   passport.authenticate("jwt", { session: false }),
@@ -273,6 +350,16 @@ app.post(
     });
   }
 );
+
+/**
+ * updates user profile.
+ * @alias updateUserprofile
+ * @param {string} username - Express request object with parameter name of user.
+ * @param {string} password - Express request object with parameter password.
+ * @param {string} email - Express request object with parameter email.
+ * @param {date} birtday - Express request object with parameter birthday.
+ * @returns {Promise<void>} - a promise as return object.
+ */
 
 app.put(
   "/users/:Username",
@@ -328,6 +415,7 @@ app.put(
   }
 );
 
+// listens for requests
 const port = process.env.PORT || 8080;
 app.listen(port, "0.0.0.0", () => {
   console.log("Listening on Port " + port);
