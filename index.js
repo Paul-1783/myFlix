@@ -29,7 +29,7 @@ const cors = require("cors");
 // allowed urls for Cross - Origin Resource Sharing
 let allowedOrigins = [
   "*",
-  "https://paul-1783.github.io/myFlix-Angular-client",
+  "https://paul-1783.github.io/",
   "https://myflixmovielibrary.netlify.app",
   "http://localhost:8080",
   "https://myflicsdb3.onrender.com",
