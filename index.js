@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const cors = require("cors");
 
-//allowed urls for Cross - Origin Resource Sharing
+// allowed urls for Cross - Origin Resource Sharing
 let allowedOrigins = [
   "*",
   "https://myflixmovielibrary.netlify.app",
@@ -80,7 +80,6 @@ app.use((err, req, res, next) => {
  * @param {Object} req - Express request object.
  * @param{Object} res - Express response object.
  */
-
 app.get("/", (req, res) => {
   res.send("root of movie web api");
 });
@@ -92,7 +91,6 @@ app.get("/", (req, res) => {
  * @param {Object} res - Express response object.
  * @returns {Promise<void>} - a promise as return object.
  *  */
-
 app.get(
   "/movies",
   passport.authenticate("jwt", { session: false }),
@@ -113,7 +111,6 @@ app.get(
  * @param {Object} res - Express response object.
  * @returns {Promise<void>} - a promise as return object.
  *  */
-
 app.get(
   "/users",
   passport.authenticate("jwt", { session: false }),
@@ -136,7 +133,6 @@ app.get(
  * @param {Object} res - Express response object.
  * @returns {Promise<void>} - a promise as return object.
  */
-
 app.get(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
@@ -159,7 +155,6 @@ app.get(
  * @param {Object} res - Express response object.
  * @returns {Promise<void>} - a promise as return object.
  */
-
 app.get(
   "/movies/directors/:directorName",
   passport.authenticate("jwt", { session: false }),
@@ -182,7 +177,6 @@ app.get(
  * @param {Object} res - Express response object.
  * @returns {Promise<void>} - a promise as return object.
  */
-
 app.get(
   "/movies/genre/:genreName",
   passport.authenticate("jwt", { session: false }),
@@ -205,7 +199,6 @@ app.get(
  * @param {Object} res - Express response object.
  * @returns {Promise<void>} - a promise as return object.
  */
-
 app.get(
   "/movies/:name",
   passport.authenticate("jwt", { session: false }),
@@ -230,7 +223,6 @@ app.get(
  * @param {date} birtday - Express request object with parameter birthday.
  * @returns {Promise<void>} - a promise as return object.
  */
-
 app.post(
   "/users",
   [
@@ -276,7 +268,6 @@ app.post(
  * @param {string} username - - Express request object with parameter name of user.
  * @returns {Promise<void>} - a promise as return object.
  */
-
 app.delete(
   "/users/:Username/",
   passport.authenticate("jwt", { session: false }),
@@ -302,7 +293,6 @@ app.delete(
  * @param {string} movieId - - Express request object with parameter id of movie.
  * @returns {Promise<void>} - a promise as return object.
  */
-
 app.delete(
   "/users/:Username/movies/:favoriteMovieId",
   passport.authenticate("jwt", { session: false }),
@@ -330,7 +320,6 @@ app.delete(
  * @param {string} movieId - - Express request object with parameter id of movie.
  * @returns {Promise<void>} - a promise as return object.
  */
-
 app.post(
   "/users/:name/movies/:favoriteMovieId",
   passport.authenticate("jwt", { session: false }),
@@ -360,7 +349,6 @@ app.post(
  * @param {date} birtday - Express request object with parameter birthday.
  * @returns {Promise<void>} - a promise as return object.
  */
-
 app.put(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
