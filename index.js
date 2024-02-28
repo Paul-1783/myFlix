@@ -30,6 +30,8 @@ const cors = require("cors");
 let allowedOrigins = [
   "*",
   "https://paul-1783.github.io/",
+  "https://paul-1783.github.io/myFlix-Angular-client",
+  "https://paul-1783.github.io/myFlix-Angular-client/welcome",
   "https://myflixmovielibrary.netlify.app",
   "http://localhost:8080",
   "https://myflicsdb3.onrender.com",
